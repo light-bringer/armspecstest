@@ -66,4 +66,4 @@ grunt.initConfig({
   }
 });
 //grunt.registerTask('test', ['jshint', 'jscs', 'jsbeautifier:test', 'jsbeautifier:write', 'mochacli']);
-grunt.registerTask('test', ['jsbeautifier:test', 'jsbeautifier:write', 'mochacli']);
+//grunt.registerTask('test', ['jsbeautifier:test', 'jsbeautifier:write', 'mochacli']);
