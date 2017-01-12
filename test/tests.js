@@ -179,6 +179,7 @@ function validateTemplate(templatePath, parametersPath) {
       .send(JSON.stringify(requestBody))
       .end(function (response) {
         if (response.status !== 200) {
+          console.log(response);
           return reject(response);
         }
 
