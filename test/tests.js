@@ -1,4 +1,4 @@
-/*global describe, it*/
+l /*global describe, it*/
 var assert = require('assert'),
   fs = require('fs'),
   execSync = require('child_process').execSync,
@@ -214,7 +214,7 @@ function deployTemplate(templatePath, parametersPath) {
   validateTemplateParameters(templatePath, requestBody.template);
 
   var intervalObj = timedOutput(true);
-  debug('making deploy request');
+  console.log('making deploy request');
 
   return new RSVP.Promise(function (resolve, reject) {
     unirest.post(process.env.VALIDATION_HOST + '/deploy')
@@ -223,8 +223,8 @@ function deployTemplate(templatePath, parametersPath) {
       .send(JSON.stringify(requestBody))
       .end(function (response) {
         timedOutput(false, intervalObj);
-        debug(response.status);
-        debug(response.body);
+        console.log(response.status);
+        console.log(response.body);
 
         // 202 is the long poll response
         // anything else is really bad
@@ -252,7 +252,7 @@ function getDirectories(srcpath) {
 function generateTests(modifiedPaths) {
   var tests = [];
   var directories = getDirectories('./');
-  debug(modifiedPaths);
+  console.log(modifiedPaths);
   var modifiedDirs = {};
 
   for (var k in modifiedPaths) {
@@ -264,8 +264,8 @@ function generateTests(modifiedPaths) {
       modifiedDirs[path.dirname(k)] = true;
     }
   }
-  debug('modified dirs:');
-  debug(modifiedDirs);
+  console.log('modified dirs:');
+  console.log(modifiedDirs);
   directories.forEach(function (dirName) {
     // exceptions
     if (dirName === '.git' ||
@@ -293,8 +293,8 @@ function generateTests(modifiedPaths) {
     });
   });
 
-  debug('created tests:');
-  debug(tests);
+  console.log('created tests:');
+  console.log(tests);
 
   return tests;
 }
@@ -335,7 +335,7 @@ describe('Template', function () {
     // we automatically reset to the beginning of the commit range
     // so this includes all file paths that have changed for the CI run
     modifiedPaths = getModifiedPaths();
-    debug(modifiedPaths);
+    console.log(modifiedPaths);
     for (var i in modifiedPaths) {
       if (typeof i === 'string') {
         count += 1;
@@ -361,7 +361,7 @@ describe('Template', function () {
 
           return validateTemplate.apply(null, test.args)
             .then(function () {
-              debug('template validation sucessful, deploying template...');
+              console.log('template validation sucessful, deploying template...');
               return deployTemplate.apply(null, test.args);
             })
             .then(function () {
