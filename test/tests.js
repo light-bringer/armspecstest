@@ -137,7 +137,7 @@ function deployTemplate(requestBody) {
     }
 
     var intervalObj = timedOutput(true);
-    console.log("making deploy request");
+    console.log('making deploy request');
     debug('making deploy request');
     
 
@@ -149,8 +149,8 @@ function deployTemplate(requestBody) {
         .send(JSON.stringify(requestBody))
         .end(function (response) {
           timedOutput(false, intervalObj);
-          console.log("status : " + response.status);
-          console.log("body: " response.body);
+          console.log('status : ' + response.status);
+          console.log('body: ' + response.body);
           debug(response.status);
           debug(response.body);
 
