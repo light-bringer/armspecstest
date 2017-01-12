@@ -214,8 +214,7 @@ function deployTemplate(templatePath, parametersPath) {
   validateTemplateParameters(templatePath, requestBody.template);
 
   var intervalObj = timedOutput(true);
-  console.log('making deploy request');
-  
+  debug('making deploy request');
 
   return new RSVP.Promise(function (resolve, reject) {
     unirest.post(process.env.VALIDATION_HOST + '/deploy')
@@ -224,8 +223,6 @@ function deployTemplate(templatePath, parametersPath) {
       .send(JSON.stringify(requestBody))
       .end(function (response) {
         timedOutput(false, intervalObj);
-        console.log(response.status);
-        console.log(response.body);
         debug(response.status);
         debug(response.body);
 
@@ -255,7 +252,7 @@ function getDirectories(srcpath) {
 function generateTests(modifiedPaths) {
   var tests = [];
   var directories = getDirectories('./');
-  console.log(modifiedPaths);
+  debug(modifiedPaths);
   var modifiedDirs = {};
 
   for (var k in modifiedPaths) {
@@ -267,8 +264,8 @@ function generateTests(modifiedPaths) {
       modifiedDirs[path.dirname(k)] = true;
     }
   }
-  console.log('modified dirs:');
-  console.log(modifiedDirs);
+  debug('modified dirs:');
+  debug(modifiedDirs);
   directories.forEach(function (dirName) {
     // exceptions
     if (dirName === '.git' ||
@@ -296,8 +293,8 @@ function generateTests(modifiedPaths) {
     });
   });
 
-  console.log('created tests:');
-  console.log(tests);
+  debug('created tests:');
+  debug(tests);
 
   return tests;
 }
@@ -338,7 +335,6 @@ describe('Template', function () {
     // we automatically reset to the beginning of the commit range
     // so this includes all file paths that have changed for the CI run
     modifiedPaths = getModifiedPaths();
-    console.log(modifiedPaths);
     debug(modifiedPaths);
     for (var i in modifiedPaths) {
       if (typeof i === 'string') {
@@ -365,7 +361,6 @@ describe('Template', function () {
 
           return validateTemplate.apply(null, test.args)
             .then(function () {
-              console.log('template validation sucessful, deploying template...');
               debug('template validation sucessful, deploying template...');
               return deployTemplate.apply(null, test.args);
             })
