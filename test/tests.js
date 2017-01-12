@@ -6,7 +6,7 @@ var assert = require('assert'),
   RSVP = require('rsvp'),
   unirest = require('unirest'),
   skeemas = require('skeemas'),
-  //debug = require('debug')('validator'),
+  // debug = require('debug')('validator'),
   parallel = require('mocha.parallel'),
   colors = require('mocha/lib/reporters/base').colors;
 
