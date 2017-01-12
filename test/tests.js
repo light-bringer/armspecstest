@@ -214,7 +214,7 @@ function deployTemplate(templatePath, parametersPath) {
   validateTemplateParameters(templatePath, requestBody.template);
 
   var intervalObj = timedOutput(true);
-  debug('making deploy request');
+  console.log('making deploy request');
 
   return new RSVP.Promise(function (resolve, reject) {
     unirest.post(process.env.VALIDATION_HOST + '/deploy')
@@ -223,7 +223,9 @@ function deployTemplate(templatePath, parametersPath) {
       .send(JSON.stringify(requestBody))
       .end(function (response) {
         timedOutput(false, intervalObj);
+        console.log(response.status)
         debug(response.status);
+        console.log(response.body)
         debug(response.body);
 
         // 202 is the long poll response
