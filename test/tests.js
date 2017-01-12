@@ -1,4 +1,4 @@
-l /*global describe, it*/
+ /*global describe, it*/
 var assert = require('assert'),
   fs = require('fs'),
   execSync = require('child_process').execSync,
@@ -6,7 +6,7 @@ var assert = require('assert'),
   RSVP = require('rsvp'),
   unirest = require('unirest'),
   skeemas = require('skeemas'),
-  debug = require('debug')('validator'),
+  //debug = require('debug')('validator'),
   parallel = require('mocha.parallel'),
   colors = require('mocha/lib/reporters/base').colors;
 
